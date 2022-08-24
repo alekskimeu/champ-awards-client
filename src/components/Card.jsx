@@ -75,10 +75,15 @@ const Button = styled.button`
   font-weight: 500;
   font-size: .9rem;
   border-radius: .3rem;
-  color: #A7CAED;
-  border: 1px solid #A7CAED;
+  color: var(--primary);
+  border: 1px solid var(--primary);  
   background-color: transparent;
   transition: all .5s ease;
+
+  &:hover {
+    color: #A7CAED;
+    border: 1px solid #A7CAED;
+  }
 `
 
 export default Card;

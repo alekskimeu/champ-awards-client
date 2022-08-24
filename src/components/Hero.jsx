@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import styled from 'styled-components'
 import Card from './Card'
 
@@ -7,6 +8,8 @@ import image from '../assets/header.jpg'
 import {contestants} from '../data/contestants'
 
 const Hero = () => {
+  const [search, setSearch] = useState("");
+
   return (
     <Container>
       <Wrapper>
@@ -35,9 +38,16 @@ const Hero = () => {
         </Header>
 
         <Polls>
-          {contestants.map(user => (
-            <Card user={user} key={user.index} />
-          ))}
+          <Subtitle>Vote for your favorite contestant</Subtitle>
+          <Search>
+            <SearchRoundedIcon />
+            <Input type="search" placeholder="Search" onChange={(e) => setSearch(e.target.value)} />
+          </Search>
+          <Cards>
+            {contestants.filter(user => user.name.includes(search)).map(user => (
+              <Card user={user} key={user.index} />
+            ))}
+          </Cards>
         </Polls>
       </Wrapper>
     </Container>
@@ -75,7 +85,7 @@ const Header = styled.div`
   align-items: center;
   gap: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(231, 231, 231, .3);
+  border-bottom: 1px solid rgba(231, 231, 231, .2);
 
   @media screen and (max-width: 800px) {
     flex-direction: column;
@@ -94,8 +104,10 @@ const Title = styled.h1`
 
 const Subtitle = styled.h2`
   font-size: 1.2rem;
-  opacity: .8;
+  opacity: .7;
   color: var(--white);
+  text-align: center;
+  margin-bottom: 1rem;
 `
 
 const Countdown = styled.div` 
@@ -106,7 +118,7 @@ const Countdown = styled.div`
 `
 
 const Unit = styled.div`
-  background-color: var(--white);
+  background-color: #e4e3e3;
   box-shadow: 2px 4px 8px rgba(0,0,0, .8);
   padding: 0.5rem .6rem;
   display: flex;
@@ -129,6 +141,31 @@ const Description = styled.p`
 
 const Polls = styled.div`
   margin-top: 2rem;
+`
+
+const Search = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 2rem auto;
+  background-color: #e9e9e9;
+  width: 25vw;
+  border-radius: 0.3rem;
+  padding-left: .5rem;
+  `
+
+const Input = styled.input`
+  padding: 0.65rem .7rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  width: 100%;
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+  margin-left: 0.4rem;
+`
+
+const Cards = styled.div`
   width: 100%;
   top: 12rem;
   display: grid;
