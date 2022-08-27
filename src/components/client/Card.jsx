@@ -1,22 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LinearProgress from '@mui/material/LinearProgress';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
 
 import styled from 'styled-components'
 
-import image from '../assets/user.jpg';
+import image from '../../assets/user.jpg';
+import ConfirmDialog from '../ConfirmDialog';
+import { api } from '../../utils/api';
 
 const Card = ({ user }) => {
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subtitle: "",
+    buttonText: ""
+  })
+
+  const handleVoting = async (id) => {
+    try {
+      await api.put(`/contestants/polls/${id}`);
+    } catch (error) {
+      console.log(error.message);      
+    }
+    // Return a message on a modal on Success or Failure
+    setConfirmDialog({
+      isOpen: true,
+      title: "Successful",
+      subtitle: `You voted for ${user.firstName} ${user.lastName}`,
+      button: "Ok"
+    });
+}
+
   return (
     <Container>
       <Header>
-        <Image src={image} width="80" height="80" />
+        <Image src={user.imageUrl} width="80" height="80" />
         <Content>
-          <Name>{user.name}</Name>
+          <Name>{ user.firstName } { user.lastName }</Name>
           <LinearProgress variant="determinate" value={user.votes} />
           <Percentage>{ user.votes / 100 }%</Percentage>
           <Votes>{user.votes} Votes</Votes>
-          <Button>Vote <HowToVoteIcon /></Button>
+          <Button onClick={() => handleVoting(user._id)}>Vote <HowToVoteIcon /></Button>
         </Content>
       </Header>
     </Container>
@@ -68,6 +92,7 @@ const Votes = styled.p`
 const Button = styled.button`
   display: flex;
   align-items: center;
+	gap: .5rem;
   cursor: pointer;
   width: fit-content;
   margin-top: .5rem;

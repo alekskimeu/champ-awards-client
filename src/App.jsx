@@ -1,19 +1,31 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import styled from 'styled-components'
+import styled from "styled-components";
+
+import Polls from "./pages/Polls";
+import Dashboard from "./pages/Dashboard";
+import Events from "./pages/Events";
+import Event from "./pages/Event";
+import Participants from "./pages/Participants";
 
 const App = () => {
-
-  return (
-    <Container>
-      <Hero />
-    </Container>
-  )
-}
+	return (
+		<Container>
+			<Router>
+				<Routes>
+					<Route path="/" exact element={<Polls />} />
+					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/participants" element={<Participants />} />
+					<Route path="/events" element={<Events />} />
+					<Route path="/events/1" element={<Event />} />
+				</Routes>
+			</Router>
+		</Container>
+	);
+};
 
 const Container = styled.div`
-  min-height: 100vh;
-`
+	min-height: 100vh;
+`;
 
-export default App
+export default App;
