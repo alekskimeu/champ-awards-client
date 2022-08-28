@@ -1,6 +1,7 @@
 import React from "react";
 import styled from 'styled-components'
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Header = () => {
 	return (
@@ -9,6 +10,9 @@ const Header = () => {
 				<SearchRoundedIcon />
 				<Input type="search" placeholder="Search Data" />
 			</Search>
+			<Button>
+				Logout <LogoutIcon />
+			</Button>
 		</Container>
 	);
 };
@@ -18,13 +22,14 @@ const Container = styled.div`
 	height: 5rem;
 	background-color: whitesmoke;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 	position: fixed;
 	top: 0;
+	padding-left: 15vw;
 	width: 100%;
 	z-index: 1;
-	`
+`;
 
 const Search = styled.div`
 	display: flex;
@@ -32,8 +37,8 @@ const Search = styled.div`
 	background-color: var(--white);
 	width: 30vw;
 	border-radius: 0.5rem;
-	padding-left: .8rem;
-`
+	padding-left: 0.8rem;
+`;
 
 const Input = styled.input`
 	width: 100%;
@@ -42,6 +47,26 @@ const Input = styled.input`
 	outline: none;
 	border-radius: 0.5rem;
 	font-size: 1rem;
-`
+`;
+
+const Button = styled.button`
+	border: none;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	cursor: pointer;
+	width: fit-content;
+	padding: 0.8rem 2rem;
+	font-weight: 500;
+	font-size: 1rem;
+	border-radius: 2rem;
+	color: var(--white);
+	background-color: var(--danger);
+	transition: all 0.5s ease;
+
+	&:hover {
+		opacity: 0.8;
+	}
+`;
 
 export default Header;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -34,7 +35,7 @@ const Event = ({ event }) => {
 							{event.participants.length} Participants
 						</Participants>
 						<Action>
-							<Link href="/events/1">Details</Link>
+							<Link to={`/events/${event._id}`} className="btn-more">Details</Link>
 							<Cta>
 								<Button>
 									<EditIcon onClick={showModal} />
@@ -105,6 +106,7 @@ const Action = styled.div`
 	align-items: center;
 	gap: 1rem;
 	width: 100%;
+	margin-top: 1rem;
 `;
 
 const Cta = styled.div`
@@ -140,25 +142,5 @@ const Button = styled.button`
 	}
 `;
 
-const Link = styled.a`
-	display: flex;
-	align-items: center;
-	border: none;
-	gap: 0.5rem;
-	cursor: pointer;
-	width: fit-content;
-	margin-top: 0.5rem;
-	padding: 0.6rem 0.7rem;
-	font-weight: 600;
-	font-size: 0.9rem;
-	border-radius: 0.3rem;
-	background-color: #0059ff;
-	color: var(--white);
-	transition: all 0.5s ease;
-
-	&:hover {
-		opacity: 0.9;
-	}
-`;
 
 export default Event;

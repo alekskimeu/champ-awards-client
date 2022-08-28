@@ -23,6 +23,11 @@ a {
   text-decoration: none;
 }
 
+a.active {
+	background-color: var(--primary);
+	color: var(--white);
+}
+
 body {
   background-color: var(--white);
   font-family: 'Abel', sans-serif;
@@ -42,12 +47,6 @@ body {
 	color: black;
 }
 
-.sidebar-link:first-child,
-.sidebar-link:hover {
-		background-color: var(--primary);
-		color: var(--white);
-}
-
 .header-nav {
 	font-size: 1.1rem;
 	border-radius: 0.3rem;
@@ -62,5 +61,24 @@ body {
 }
 
 .header-nav:hover {
+	opacity: .9;
+}
+
+.btn-more {
+	font-size: 1rem;
+	border-radius: 0.3rem;
+	padding: .5rem .8rem;
+	font-weight: 600;
+	transition: all 0.5s ease;
+	color: var(--white);
+	background-color: var(--primary);
+	transition: all .5s ease;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	-o-transition: all .5s ease;
+}
+
+.btn-more:hover {
 	opacity: .9;
 }

@@ -1,44 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import FormInput from "../common/FormInput";
 
 const ContestantForm = ({ user }) => {
 	return (
 		<Container>
 			{user && <Image src={user.imageUrl} width="100" height="100" />}
 			<FormGroup>
-				<InputContainer>
-					<Label>First Name</Label>
-					<Input
-						type="text"
-						placeholder="First Name"
-						value={user ? user.firstName : ""}
-						required
-					/>
-				</InputContainer>
-				<InputContainer>
-					<Label>Last Name</Label>
-					<Input
-						type="text"
-						placeholder="Last Name"
-						value={user ? user.lastName : ""}
-						required
-					/>
-				</InputContainer>
+				<FormInput
+					type="text"
+					label="First Name"
+					value={user ? user.firstName : ""}
+					required
+				/>
+				<FormInput
+					type="text"
+					label="Last Name"
+					value={user ? user.lastName : ""}
+					required
+				/>
 			</FormGroup>
 			<FormGroup>
-				<InputContainer>
-					<Label>Age</Label>
-					<Input
-						type="text"
-						placeholder="Age"
-						value={user ? user.age : ""}
-						required
-					/>
-				</InputContainer>
-				<InputContainer>
-					<Label>Photo</Label>
-					<Input type="file" required />
-				</InputContainer>
+				<FormInput
+					type="number"
+					label="Age"
+					value={user ? user.age : ""}
+					required
+				/>
+				<FormInput type="file" label="Photo" />
 			</FormGroup>
 			<InputContainer>
 				<Button>{user ? "Update" : "Submit"}</Button>

@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
+import FormInput from "../common/FormInput";
+
 const EventForm = ({ event }) => {
+	const handleChange = (e) => {};
+
 	return (
 		<Container>
 			{event && (
@@ -10,19 +14,19 @@ const EventForm = ({ event }) => {
 				</ImageContainer>
 			)}
 			<FormGroup>
-				<InputContainer>
-					<Label>Event Name</Label>
-					<Input
-						type="text"
-						placeholder="Event Name"
-						value={event ? event.name : ""}
-						required
-					/>
-				</InputContainer>
-				<InputContainer>
-					<Label>Date</Label>
-					<Input type="date" value={event ? event.date : ""} required />
-				</InputContainer>
+				<FormInput
+					type="text"
+					label="Event Name"
+					value={event ? event.name : ""}
+					onChange={(e) => handleChange()}
+				/>
+				<FormInput
+					type="date"
+					label="Date"
+					value={event ? event.date : ""}
+					onChange={(e) => handleChange()}
+					required
+				/>
 			</FormGroup>
 			<InputContainer>
 				<Label>Description</Label>
@@ -31,10 +35,7 @@ const EventForm = ({ event }) => {
 				</Textarea>
 			</InputContainer>
 			<FormGroup>
-				<InputContainer>
-					<Label>Image</Label>
-					<Input type="file" required />
-				</InputContainer>
+				<FormInput type="file" label="Image" />
 			</FormGroup>
 			<InputContainer>
 				<Button>{event ? "Update" : "Submit"}</Button>
@@ -61,22 +62,9 @@ const InputContainer = styled.div`
 	gap: 0.5rem;
 `;
 
-const Label = styled.div`
+const Label = styled.label`
 	font-weight: 600;
 	font-size: 1.1rem;
-`;
-
-const Input = styled.input`
-	padding: 0.7rem 0.8rem;
-	border: 1px solid rgba(226, 226, 226);
-	outline: none;
-	font-size: 1rem;
-	width: 100%;
-	border-radius: 0.3rem;
-
-	&:focus {
-		border-color: var(--primary);
-	}
 `;
 
 const Textarea = styled.textarea`

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Modal from "../components/admin/Modal";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import styled from "styled-components";
@@ -12,8 +13,11 @@ import Participant from "../components/admin/Participant";
 import { api } from "../utils/api";
 
 const Event = () => {
+	const { id } = useParams();
+
 	const [search, setSearch] = useState("");
 	const [users, setUsers] = useState([]);
+	const [event, setEvent] = useState({});
 	const [show, setShow] = useState(false);
 
 	useEffect(() => {
@@ -21,8 +25,14 @@ const Event = () => {
 			const response = await api.get("/contestants");
 			setUsers(response.data);
 		};
+
+		const fetchEvent = async () => {
+			const response = await api.get(`/events/${id}`);
+			setEvent(response.data);
+		};
+		fetchEvent();
 		fetchUsers();
-	}, [users]);
+	}, [users, event]);
 
 	const handleClose = () => {
 		setShow(false);
@@ -37,16 +47,13 @@ const Event = () => {
 			<Content>
 				<EventContainer>
 					<ImageContainer>
-						<Image src={image} alt="" />
+						<Image src={event.imageUrl} alt={event.name} />
 					</ImageContainer>
 					<Details>
-						<Title>Kalasha 2022</Title>
+						<Title>{event.name}</Title>
+						<EventDate>{event.date}</EventDate>
 						<Description>
-							The world breaks everyone, and afterwards, many are strong at the
-							broken places. The world breaks everyone, and afterwards, many are
-							strong at the broken places. The world breaks everyone, and
-							afterwards, many are strong at the broken places. The world breaks
-							everyone, and afterwards, many are strong at the broken places.
+							{event.description}
 						</Description>
 						<Cta>
 							<Button onClick={showModal}>Edit</Button>
@@ -75,7 +82,7 @@ const Event = () => {
 				</ParticipantsContainer>
 
 				<Modal show={show} handleClose={handleClose} title="Add Event">
-					{<EventForm />}
+					{<EventForm event={event} />}
 				</Modal>
 			</Content>
 		</Layout>
@@ -108,16 +115,24 @@ const EventContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-	flex: 0.6;
+	flex: 0.5;
+	height: 350px;
 `;
 
 const Image = styled.img`
 	width: 100%;
+	height: 100%;
+	object-fit: contain;
 	border-radius: 0.3rem;
 `;
 
 const Details = styled.div`
 	flex: 1;
+`;
+
+const EventDate = styled.h3`
+	opacity: 0.8;
+	font-size: 1.2rem;
 `;
 
 const Description = styled.p`

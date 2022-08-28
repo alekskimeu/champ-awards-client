@@ -17,7 +17,7 @@ const App = () => {
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/participants" element={<Participants />} />
 					<Route path="/events" element={<Events />} />
-					<Route path="/events/1" element={<Event />} />
+					<Route path="/events/:id" element={<Event />} />
 				</Routes>
 			</Router>
 		</Container>

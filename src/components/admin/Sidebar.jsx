@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import LogoutIcon from "@mui/icons-material/Logout";
 
@@ -11,22 +11,22 @@ import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 const Sidebar = () => {
 	return (
 		<Container>
-			<Greeting>Hello, Admin 👋</Greeting>
+			<Logo>Coach Michael</Logo>
 			<Title>Menu</Title>
 			<Menu>
 				<Links>
-					<Link className="sidebar-link" to="/dashboard">
+					<NavLink className="sidebar-link" to="/dashboard">
 						<DashboardIcon style={{ opacity: 0.8 }} />
 						Dashboard
-					</Link>
-					<Link className="sidebar-link" to="/events">
+					</NavLink>
+					<NavLink className="sidebar-link" to="/events">
 						<EventAvailableIcon style={{ opacity: 0.8 }} />
 						Events
-					</Link>
-					<Link className="sidebar-link" to="/participants">
+					</NavLink>
+					<NavLink className="sidebar-link" to="/participants">
 						<GroupIcon style={{ opacity: 0.8 }} />
 						Participants
-					</Link>
+					</NavLink>
 				</Links>
 				<Button>
 					Logout <LogoutIcon />
@@ -38,7 +38,7 @@ const Sidebar = () => {
 
 const Container = styled.div`
 	flex: 0.5;
-	padding: 2rem;
+	padding: 1.5rem 2rem 3rem 2rem;
 	height: 100vh;
 	background-color: whitesmoke;
 	position: fixed;
@@ -46,8 +46,8 @@ const Container = styled.div`
 	min-width: 15vw;
 `;
 
-const Greeting = styled.h3`
-	font-size: 1.1rem;
+const Logo = styled.h1`
+	font-size: 1.6rem;
 	margin-bottom: 2rem;
 `;
 
