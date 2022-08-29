@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import styled from "styled-components";
 import Card from "../components/client/Card";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 import image from "../assets/header.jpg";
+import year from "../assets/year.png";
+
 import { api } from "../utils/api";
 
 const Polls = () => {
@@ -24,7 +28,8 @@ const Polls = () => {
 			<Wrapper>
 				<Header>
 					<Left>
-						<Title>Kalasha 2022</Title>
+						<Title>Champ Awards</Title>
+						<Year src={year} width="50" />
 					</Left>
 					<Countdown>
 						<Unit>
@@ -57,11 +62,19 @@ const Polls = () => {
 						/>
 					</Search>
 					<Cards>
-						{contestants
-							.filter((user) => user.firstName.includes(search) || user.lastName.includes(search))
-							.map((user) => (
-								<Card user={user} key={user.index} />
-							))}
+						{contestants.length > 0 ? (
+							contestants
+								.filter(
+									(user) =>
+										user.firstName.includes(search) ||
+										user.lastName.includes(search)
+								)
+								.map((user) => <Card user={user} key={user.index} />)
+						) : (
+							<Box sx={{ display: "flex" }}>
+								<CircularProgress />
+							</Box>
+						)}
 					</Cards>
 				</PollContainer>
 			</Wrapper>
@@ -112,13 +125,20 @@ const Header = styled.div`
 	}
 `;
 
-const Left = styled.div``;
+const Left = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+`;
 
 const Title = styled.h1`
-	font-size: 2.4rem;
+	font-size: 2rem;
 	font-weight: 700;
 	color: var(--white);
 `;
+
+const Year = styled.img``;
+
 
 const Subtitle = styled.h2`
 	font-size: 1.2rem;

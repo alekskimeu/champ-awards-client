@@ -42,7 +42,7 @@ const ContestantForm = ({ user }) => {
 						required
 						onChange={(e) => setAge(e.target.value)}
 					/>
-					<FormInput type="file" label="Photo" />
+					<FormInput type="file" label="Photo" required />
 				</FormGroup>
 				<InputContainer>
 					<Button>{user ? "Update" : "Submit"}</Button>

@@ -4,6 +4,9 @@ import Layout from "../components/admin/Layout";
 import Event from "../components/admin/Event";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
 import { stats } from "../utils/stats";
 import { api } from "../utils/api";
 import Modal from "../components/admin/Modal";
@@ -47,11 +50,15 @@ const Events = () => {
 					<Button onClick={showModal}>New Event</Button>
 				</CardsHeader>
 				<Cards>
-					{events
-						.filter((event) => event.name.includes(search))
-						.map((event) => (
-							<Event event={event} key={event._id} />
-						))}
+					{events.length > 0 ? (
+						events
+							.filter((event) => event.name.includes(search))
+							.map((event) => <Event event={event} key={event._id} />)
+					) : (
+						<Box sx={{ display: "flex" }}>
+							<CircularProgress />
+						</Box>
+					)}
 				</Cards>
 
 				<Modal show={show} handleClose={handleClose} title="Add Event">

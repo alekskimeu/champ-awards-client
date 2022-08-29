@@ -16,18 +16,19 @@ const EventForm = ({ event }) => {
 
 	return (
 		<Container>
-			{event && (
-				<ImageContainer>
-					<Image src={event.imageUrl} width="120" height="120" />
-				</ImageContainer>
-			)}
 			<Form onSubmit={handleSubmit}>
+				{event && (
+					<ImageContainer>
+						<Image src={event.imageUrl} width="120" height="120" />
+					</ImageContainer>
+				)}
 				<FormGroup>
 					<FormInput
 						type="text"
 						label="Event Name"
 						value={event ? event.name : ""}
 						onChange={(e) => setName(e.target.value)}
+						required
 					/>
 					<FormInput
 						type="date"
@@ -38,17 +39,18 @@ const EventForm = ({ event }) => {
 					/>
 				</FormGroup>
 				<InputContainer>
-					<Label>Description</Label>
+					<Label>Description<Required>*</Required></Label>
 					<Textarea
 						placeholder="Description"
 						name="description"
 						rows="5"
 						onChange={(e) => setDescription(e.target.value)}
 						defaultValue={event ? event.description : ""}
+						required
 					/>
 				</InputContainer>
 				<FormGroup>
-					<FormInput type="file" label="Image" />
+					<FormInput type="file" label="Image" required />
 				</FormGroup>
 				<InputContainer>
 					<Button>{event ? "Update" : "Submit"}</Button>
@@ -85,6 +87,11 @@ const InputContainer = styled.div`
 const Label = styled.label`
 	font-weight: 600;
 	font-size: 1.1rem;
+`;
+
+const Required = styled.label`
+	color: #ca0101;
+	margin-left: .2rem;
 `;
 
 const Textarea = styled.textarea`

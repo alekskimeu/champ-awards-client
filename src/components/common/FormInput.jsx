@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const FormInput = ({ label, type, value, onChange, item }) => {
+const FormInput = ({ label, type, value, onChange, item, required }) => {
 	return (
 		<InputContainer>
-			<Label>{label}</Label>
+			<Label>{label}{ required && <Required>*</Required> }</Label>
 			<Input
 				type={type}
 				placeholder={label}
@@ -27,8 +27,13 @@ const Label = styled.label`
 	font-size: 1.1rem;
 `;
 
+const Required = styled.label`
+	color: #ca0101;
+	margin-left: .2rem;
+`;
+
 const Input = styled.input`
-	padding: 0.7rem 0.8rem;
+	padding: 0.8rem;
 	border: 1px solid rgba(226, 226, 226);
 	outline: none;
 	font-size: 1rem;

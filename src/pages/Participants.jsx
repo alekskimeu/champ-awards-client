@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Layout from "../components/admin/Layout";
 import Participant from "../components/admin/Participant";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 import { stats } from "../utils/stats";
 import { api } from "../utils/api";
@@ -47,15 +49,19 @@ const Dashboard = () => {
 					<Button onClick={showModal}>New Contestant</Button>
 				</CardsHeader>
 				<Cards>
-					{contestants
-						.filter(
-							(user) =>
-								user.firstName.includes(search) ||
-								user.lastName.includes(search)
-						)
-						.map((user) => (
-							<Participant user={user} key={user.index} />
-						))}
+					{contestants.length > 0 ? (
+						contestants
+							.filter(
+								(user) =>
+									user.firstName.includes(search) ||
+									user.lastName.includes(search)
+							)
+							.map((user) => <Participant user={user} key={user.index} />)
+					) : (
+						<Box sx={{ display: "flex" }}>
+							<CircularProgress />
+						</Box>
+					)}
 				</Cards>
 
 				<Modal show={show} handleClose={handleClose} title="Add Contestant">

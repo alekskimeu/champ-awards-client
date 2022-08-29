@@ -18,19 +18,21 @@ const Login = () => {
 			<Form onSubmit={handleLogin}>
 				<Header>
 					<Logo src={logo} width="60" />
-					<Greeting>Hello, Admin 👋</Greeting>
+					<Greeting>Welcome, Admin 👋</Greeting>
 				</Header>
 				<FormInput
 					type="text"
 					label="Email"
 					value=""
 					onChange={(e) => setEmail(e.target.value)}
+					required
 				/>
 				<FormInput
 					type="password"
 					label="Password"
 					value=""
 					onChange={(e) => setPassword(e.target.value)}
+					required
 				/>
 				<InputContainer>
 					<Button>
@@ -75,7 +77,7 @@ const Form = styled.form`
 	gap: 2rem;
 	width: 100%;
 	padding: 3rem;
-	border: 1px solid var(--primary);
+	border: 1px solid rgb(31, 118, 210, 0.8);
 	border-radius: 0.3rem;
 `;
 
