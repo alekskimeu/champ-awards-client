@@ -8,7 +8,7 @@ const FormInput = ({ label, type, value, onChange, item }) => {
 			<Input
 				type={type}
 				placeholder={label}
-				value={value}
+				defaultValue={value}
 				onChange={onChange}
 				required
 			/>

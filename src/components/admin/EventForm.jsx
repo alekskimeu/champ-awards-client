@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import FormInput from "../common/FormInput";
 
 const EventForm = ({ event }) => {
-	const handleChange = (e) => {};
+	const [name, setName] = useState("");
+	const [date, setDate] = useState("");
+	const [description, setDescription] = useState("");
+	const [image, setImage] = useState(null);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(`Name: ${name}, Date: ${date} Description": ${description}`);
+	};
 
 	return (
 		<Container>
@@ -13,38 +21,50 @@ const EventForm = ({ event }) => {
 					<Image src={event.imageUrl} width="120" height="120" />
 				</ImageContainer>
 			)}
-			<FormGroup>
-				<FormInput
-					type="text"
-					label="Event Name"
-					value={event ? event.name : ""}
-					onChange={(e) => handleChange()}
-				/>
-				<FormInput
-					type="date"
-					label="Date"
-					value={event ? event.date : ""}
-					onChange={(e) => handleChange()}
-					required
-				/>
-			</FormGroup>
-			<InputContainer>
-				<Label>Description</Label>
-				<Textarea placeholder="Description" name="description" rows="5">
-					{event ? event.description : ""}
-				</Textarea>
-			</InputContainer>
-			<FormGroup>
-				<FormInput type="file" label="Image" />
-			</FormGroup>
-			<InputContainer>
-				<Button>{event ? "Update" : "Submit"}</Button>
-			</InputContainer>
+			<Form onSubmit={handleSubmit}>
+				<FormGroup>
+					<FormInput
+						type="text"
+						label="Event Name"
+						value={event ? event.name : ""}
+						onChange={(e) => setName(e.target.value)}
+					/>
+					<FormInput
+						type="date"
+						label="Date"
+						value={event ? event.date : ""}
+						onChange={(e) => setDate(e.target.value)}
+						required
+					/>
+				</FormGroup>
+				<InputContainer>
+					<Label>Description</Label>
+					<Textarea
+						placeholder="Description"
+						name="description"
+						rows="5"
+						onChange={(e) => setDescription(e.target.value)}
+						defaultValue={event ? event.description : ""}
+					/>
+				</InputContainer>
+				<FormGroup>
+					<FormInput type="file" label="Image" />
+				</FormGroup>
+				<InputContainer>
+					<Button>{event ? "Update" : "Submit"}</Button>
+				</InputContainer>
+			</Form>
 		</Container>
 	);
 };
 
 const Container = styled.div`
+	/* display: flex;
+	flex-direction: column;
+	gap: 2rem; */
+`;
+
+const Form = styled.form`
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;

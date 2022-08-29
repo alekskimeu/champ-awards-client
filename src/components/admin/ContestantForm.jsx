@@ -1,42 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import FormInput from "../common/FormInput";
 
 const ContestantForm = ({ user }) => {
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [age, setAge] = useState(null);
+	const [photo, setPhoto] = useState(null);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		console.log(firstName, lastName, age);
+	};
+
 	return (
 		<Container>
-			{user && <Image src={user.imageUrl} width="100" height="100" />}
-			<FormGroup>
-				<FormInput
-					type="text"
-					label="First Name"
-					value={user ? user.firstName : ""}
-					required
-				/>
-				<FormInput
-					type="text"
-					label="Last Name"
-					value={user ? user.lastName : ""}
-					required
-				/>
-			</FormGroup>
-			<FormGroup>
-				<FormInput
-					type="number"
-					label="Age"
-					value={user ? user.age : ""}
-					required
-				/>
-				<FormInput type="file" label="Photo" />
-			</FormGroup>
-			<InputContainer>
-				<Button>{user ? "Update" : "Submit"}</Button>
-			</InputContainer>
+			<Form onSubmit={handleSubmit}>
+				{user && <Image src={user.imageUrl} width="100" height="100" />}
+				<FormGroup>
+					<FormInput
+						type="text"
+						label="First Name"
+						defaultValue={user ? user.firstName : ""}
+						required
+						onChange={(e) => setFirstName(e.target.value)}
+					/>
+					<FormInput
+						type="text"
+						label="Last Name"
+						defaultValue={user ? user.lastName : ""}
+						required
+						onChange={(e) => setLastName(e.target.value)}
+					/>
+				</FormGroup>
+				<FormGroup>
+					<FormInput
+						type="number"
+						label="Age"
+						defaultValue={user ? user.age : ""}
+						required
+						onChange={(e) => setAge(e.target.value)}
+					/>
+					<FormInput type="file" label="Photo" />
+				</FormGroup>
+				<InputContainer>
+					<Button>{user ? "Update" : "Submit"}</Button>
+				</InputContainer>
+			</Form>
 		</Container>
 	);
 };
 
 const Container = styled.div`
+	/* display: flex;
+	flex-direction: column;
+	gap: 2rem; */
+`;
+
+const Form = styled.form`
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
