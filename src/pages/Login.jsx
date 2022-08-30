@@ -21,7 +21,7 @@ const Login = () => {
 					<Greeting>Welcome, Admin 👋</Greeting>
 				</Header>
 				<FormInput
-					type="text"
+					type="email"
 					label="Email"
 					value=""
 					onChange={(e) => setEmail(e.target.value)}

@@ -9,6 +9,7 @@ import image from "../assets/header.jpg";
 import year from "../assets/year.png";
 
 import { api } from "../utils/api";
+import Loader from "../components/common/Loader";
 
 const Polls = () => {
 	const [search, setSearch] = useState("");
@@ -71,9 +72,7 @@ const Polls = () => {
 								)
 								.map((user) => <Card user={user} key={user.index} />)
 						) : (
-							<Box sx={{ display: "flex" }}>
-								<CircularProgress />
-							</Box>
+							<Loader />
 						)}
 					</Cards>
 				</PollContainer>

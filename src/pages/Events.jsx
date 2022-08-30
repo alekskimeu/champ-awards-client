@@ -11,6 +11,7 @@ import { stats } from "../utils/stats";
 import { api } from "../utils/api";
 import Modal from "../components/admin/Modal";
 import EventForm from "../components/admin/EventForm";
+import Loader from "../components/common/Loader";
 
 const Events = () => {
 	const [events, setEvents] = useState([]);
@@ -55,9 +56,7 @@ const Events = () => {
 							.filter((event) => event.name.includes(search))
 							.map((event) => <Event event={event} key={event._id} />)
 					) : (
-						<Box sx={{ display: "flex" }}>
-							<CircularProgress />
-						</Box>
+						<Loader />
 					)}
 				</Cards>
 

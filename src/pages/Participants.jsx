@@ -10,6 +10,7 @@ import { stats } from "../utils/stats";
 import { api } from "../utils/api";
 import Modal from "../components/admin/Modal";
 import ContestantForm from "../components/admin/ContestantForm";
+import Loader from "../components/common/Loader";
 
 const Dashboard = () => {
 	const [contestants, setContestants] = useState([]);
@@ -58,9 +59,7 @@ const Dashboard = () => {
 							)
 							.map((user) => <Participant user={user} key={user.index} />)
 					) : (
-						<Box sx={{ display: "flex" }}>
-							<CircularProgress />
-						</Box>
+						<Loader />
 					)}
 				</Cards>
 
