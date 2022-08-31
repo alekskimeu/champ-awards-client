@@ -4,7 +4,10 @@ import styled from "styled-components";
 const FormInput = ({ label, type, value, onChange, item, required }) => {
 	return (
 		<InputContainer>
-			<Label>{label}{ required && <Required>*</Required> }</Label>
+			<Label>
+				{label}
+				{required && <Required>*</Required>}
+			</Label>
 			<Input
 				type={type}
 				placeholder={label}

@@ -1,64 +1,48 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-import FormInput from "../common/FormInput";
 import { api } from "../../utils/api";
+import FormInput from "../common/FormInput";
 
-const EventForm = ({ event, setShow }) => {
+const CategoryForm = ({ category, setShow }) => {
 	const [name, setName] = useState("");
-	const [date, setDate] = useState("");
 	const [description, setDescription] = useState("");
-	const [image, setImage] = useState(null);
 
-	// Convert image to base64
-	const setFileToBase = (file) => {
-		const reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onloadend = () => {
-			setImage(reader.result);
-		};
-	};
-
-	// Handle image change
-	const handleImage = (e) => {
-		const file = e.target.files[0];
-		setFileToBase(file);
-	};
-
-	const handleSubmit = (e) => {
+	// Create new category
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = api.post("/events", { name, date, description, image });
+			const response = await api.post("/categories", { name, description });
 			setShow(false);
 		} catch (error) {
-			console.log(error.message);
+			console.log(error);
+		}
+	};
+
+	// Update category
+	const handleUpdate = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await api.put(`/categories/${category._id}`, {
+				name,
+				description,
+			});
+			setShow(false);
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
 	return (
 		<Container>
-			<Form onSubmit={handleSubmit}>
-				{event && (
-					<ImageContainer>
-						<Image src={event.imageUrl} width="120" height="120" />
-					</ImageContainer>
-				)}
-				<FormGroup>
-					<FormInput
-						type="text"
-						label="Event Name"
-						value={event ? event.name : ""}
-						onChange={(e) => setName(e.target.value)}
-						required
-					/>
-					<FormInput
-						type="date"
-						label="Date"
-						value={event ? event.date : ""}
-						onChange={(e) => setDate(e.target.value)}
-						required
-					/>
-				</FormGroup>
+			<Form onSubmit={category ? handleUpdate : handleSubmit}>
+				<FormInput
+					type="text"
+					label="Name"
+					name="name"
+					onChange={(e) => setName(e.target.value)}
+					value={category ? category.name : name}
+					required
+				/>
 				<InputContainer>
 					<Label>
 						Description<Required>*</Required>
@@ -68,21 +52,12 @@ const EventForm = ({ event, setShow }) => {
 						name="description"
 						rows="5"
 						onChange={(e) => setDescription(e.target.value)}
-						defaultValue={event ? event.description : ""}
+						defaultValue={category ? category.description : description}
 						required
 					/>
 				</InputContainer>
-				<FormGroup>
-					<FormInput
-						type="file"
-						label="Image"
-						name="image"
-						required
-						onChange={handleImage}
-					/>
-				</FormGroup>
 				<InputContainer>
-					<Button>{event ? "Update" : "Submit"}</Button>
+					<Button>{category ? "Update" : "Submit"}</Button>
 				</InputContainer>
 			</Form>
 		</Container>
@@ -136,17 +111,42 @@ const Textarea = styled.textarea`
 	}
 `;
 
-const ImageContainer = styled.div`
-	width: 120px;
-	height: 120px;
+const Select = styled.select`
+	padding: 0.8rem;
+	border: 1px solid rgba(231, 231, 231, 0.1);
+	outline: none;
+	font-size: 1rem;
+	width: 100%;
+	border-radius: 0.3rem;
+	cursor: pointer;
+
+	&:focus {
+		border-color: var(--primary);
+	}
+`;
+
+const Option = styled.option``;
+
+const Input = styled.input`
+	padding: 0.7rem 0.8rem;
+	border: 1px solid rgba(226, 226, 226);
+	outline: none;
+	font-size: 1rem;
+	width: 100%;
+	border-radius: 0.3rem;
+
+	&:focus {
+		border-color: var(--primary);
+	}
+
+	&[type="file"] {
+		padding: 0.5rem 0.8rem;
+	}
 `;
 
 const Image = styled.img`
-	border: 2px solid #5f5f5f;
 	border-radius: 50%;
 	object-fit: cover;
-	width: 100%;
-	height: 100%;
 `;
 
 const Button = styled.button`
@@ -169,4 +169,4 @@ const Button = styled.button`
 	}
 `;
 
-export default EventForm;
+export default CategoryForm;

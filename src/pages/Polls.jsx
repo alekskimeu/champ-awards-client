@@ -54,14 +54,24 @@ const Polls = () => {
 
 				<PollContainer>
 					<Subtitle>Vote for your favorite contestant</Subtitle>
-					<Search>
-						<SearchRoundedIcon />
-						<Input
-							type="search"
-							placeholder="Search"
-							onChange={(e) => setSearch(e.target.value)}
-						/>
-					</Search>
+					<HeaderWrapper>
+						<Category>All</Category>
+						<Search>
+							<SearchRoundedIcon />
+							<Input
+								type="search"
+								placeholder="Search"
+								onChange={(e) => setSearch(e.target.value)}
+							/>
+						</Search>
+						<Select>
+							<Option style={{ backgroundColor: "white" }}>Category</Option>
+							<Option style={{ backgroundColor: "white" }}>Category</Option>
+							<Option style={{ backgroundColor: "white" }}>Category</Option>
+							<Option style={{ backgroundColor: "white" }}>Category</Option>
+							<Option style={{ backgroundColor: "white" }}>Category</Option>
+						</Select>
+					</HeaderWrapper>
 					<Cards>
 						{contestants.length > 0 ? (
 							contestants
@@ -136,15 +146,52 @@ const Title = styled.h1`
 	color: var(--white);
 `;
 
+const HeaderWrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 2rem;
+	margin-bottom: 2.5rem;
+`;
+
+const Category = styled.h2`
+	color: var(--white);
+	opacity: 0.8;
+
+	@media screen and (max-width: 624px) {
+		display: none;
+	}
+`;
+
+const Select = styled.select`
+	outline: none;
+	border: none;
+	cursor: pointer;
+	padding: 0.5rem;
+	border-radius: 0.3rem;
+	font-weight: 600;
+`;
+
+const Option = styled.option`
+	outline: none;
+	border: none;
+	cursor: pointer;
+	padding: 0.5rem;
+	border-radius: 0.3rem;
+	font-weight: 600;
+`;
+
 const Year = styled.img``;
 
-
 const Subtitle = styled.h2`
-	font-size: 1.2rem;
+	width: fit-content;
+	font-size: 1.4rem;
 	opacity: 0.7;
 	color: var(--white);
 	text-align: center;
-	margin-bottom: 1rem;
+	margin: 0 auto 1rem auto;
+	padding-bottom: 0.1rem;
+	border-bottom: 1px solid rgba(231, 231, 231, 0.2);
 `;
 
 const Countdown = styled.div`
@@ -184,15 +231,14 @@ const Search = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0 auto 2.5rem auto;
 	background-color: #e9e9e9;
-	width: 25vw;
+	min-width: 20vw;
 	border-radius: 0.3rem;
 	padding-left: 0.5rem;
 `;
 
 const Input = styled.input`
-	padding: 0.8rem;
+	padding: 0.7rem 0.8rem;
 	border: none;
 	outline: none;
 	font-size: 1rem;

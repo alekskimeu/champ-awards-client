@@ -22,14 +22,14 @@ const ContestantForm = ({ user }) => {
 					<FormInput
 						type="text"
 						label="First Name"
-						defaultValue={user ? user.firstName : ""}
+						value={user ? user.firstName : ""}
 						required
 						onChange={(e) => setFirstName(e.target.value)}
 					/>
 					<FormInput
 						type="text"
 						label="Last Name"
-						defaultValue={user ? user.lastName : ""}
+						value={user ? user.lastName : ""}
 						required
 						onChange={(e) => setLastName(e.target.value)}
 					/>
@@ -38,10 +38,26 @@ const ContestantForm = ({ user }) => {
 					<FormInput
 						type="number"
 						label="Age"
-						defaultValue={user ? user.age : ""}
+						value={user ? user.age : ""}
 						required
 						onChange={(e) => setAge(e.target.value)}
 					/>
+					<InputContainer>
+						<Label>
+							Category
+							<Required>*</Required>
+						</Label>
+
+						<Select
+							value={user ? user.category : ""}
+							required
+							onChange={(e) => setAge(e.target.value)}
+						>
+							<Option>Category</Option>
+						</Select>
+					</InputContainer>
+				</FormGroup>
+				<FormGroup>
 					<FormInput type="file" label="Photo" required />
 				</FormGroup>
 				<InputContainer>
@@ -76,10 +92,31 @@ const InputContainer = styled.div`
 	gap: 0.5rem;
 `;
 
-const Label = styled.div`
+const Label = styled.label`
 	font-weight: 600;
 	font-size: 1.1rem;
 `;
+
+const Required = styled.label`
+	color: #ca0101;
+	margin-left: 0.2rem;
+`;
+
+const Select = styled.select`
+	padding: 0.8rem;
+	border: 1px solid rgba(231, 231, 231, .1);
+	outline: none;
+	font-size: 1rem;
+	width: 100%;
+	border-radius: 0.3rem;
+	cursor: pointer;
+
+	&:focus {
+		border-color: var(--primary);
+	}
+`;
+
+const Option = styled.option``;
 
 const Input = styled.input`
 	padding: 0.7rem 0.8rem;

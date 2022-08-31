@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Layout from "../components/admin/Layout";
-import Event from "../components/admin/Event";
+import Participant from "../components/admin/Participant";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
 import { stats } from "../utils/stats";
 import { api } from "../utils/api";
 import Modal from "../components/admin/Modal";
-import EventForm from "../components/admin/EventForm";
+import ContestantForm from "../components/admin/ContestantForm";
 import Loader from "../components/common/Loader";
+import Category from "../components/admin/Category";
+import CategoryForm from "../components/admin/CategoryForm.jsx";
 
-const Events = () => {
-	const [events, setEvents] = useState([]);
+const Categories = () => {
+	const [categories, setCategories] = useState([]);
 	const [search, setSearch] = useState("");
 
 	const [show, setShow] = useState(false);
@@ -28,40 +29,46 @@ const Events = () => {
 	};
 
 	useEffect(() => {
-		const fetchEvents = async () => {
-			const response = await api.get("/events");
-			setEvents(response.data);
+		const fetchContestants = async () => {
+			const response = await api.get("/categories");
+			setCategories(response.data);
 		};
-		fetchEvents();
-	}, [events]);
+		fetchContestants();
+	}, [categories]);
 
 	return (
 		<Layout>
 			<Content>
 				<CardsHeader>
-					<Title>Events</Title>
+					<Title>Categories</Title>
 					<Search>
 						<SearchRoundedIcon />
 						<Input
 							type="search"
-							placeholder="Search Event"
+							placeholder="Search Category"
 							onChange={(e) => setSearch(e.target.value)}
 						/>
 					</Search>
-					<Button onClick={showModal}>New Event</Button>
+					<Button onClick={showModal}>New Category</Button>
 				</CardsHeader>
 				<Cards>
-					{events.length > 0 ? (
-						events
-							.filter((event) => event.name.includes(search))
-							.map((event) => <Event event={event} key={event._id} />)
+					{categories.length > 0 ? (
+						categories
+							.filter(
+								(category) =>
+									category.name.includes(search) ||
+									category.description.includes(search)
+							)
+							.map((category) => (
+								<Category category={category} key={category._id} />
+							))
 					) : (
 						<Loader />
 					)}
 				</Cards>
 
-				<Modal show={show} handleClose={handleClose} title="Add Event">
-					{<EventForm setShow={setShow} />}
+				<Modal show={show} handleClose={handleClose} title="Add Category">
+					{<CategoryForm setShow={setShow} />}
 				</Modal>
 			</Content>
 		</Layout>
@@ -137,4 +144,4 @@ const Input = styled.input`
 	font-size: 1rem;
 `;
 
-export default Events;
+export default Categories;

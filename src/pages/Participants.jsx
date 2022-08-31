@@ -12,7 +12,7 @@ import Modal from "../components/admin/Modal";
 import ContestantForm from "../components/admin/ContestantForm";
 import Loader from "../components/common/Loader";
 
-const Dashboard = () => {
+const Participants = () => {
 	const [contestants, setContestants] = useState([]);
 	const [search, setSearch] = useState("");
 
@@ -57,7 +57,7 @@ const Dashboard = () => {
 									user.firstName.includes(search) ||
 									user.lastName.includes(search)
 							)
-							.map((user) => <Participant user={user} key={user.index} />)
+							.map((user) => <Participant user={user} key={user._id} />)
 					) : (
 						<Loader />
 					)}
@@ -140,4 +140,4 @@ const Input = styled.input`
 	font-size: 1rem;
 `;
 
-export default Dashboard;
+export default Participants;

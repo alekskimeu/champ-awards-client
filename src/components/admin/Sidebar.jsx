@@ -7,6 +7,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import GroupIcon from "@mui/icons-material/Group";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
+import CategoryIcon from '@mui/icons-material/Category';
 
 const Sidebar = () => {
 	return (
@@ -22,6 +23,10 @@ const Sidebar = () => {
 					<NavLink className="sidebar-link" to="/events">
 						<EventAvailableIcon style={{ opacity: 0.8 }} />
 						Events
+					</NavLink>
+					<NavLink className="sidebar-link" to="/categories">
+						<CategoryIcon style={{ opacity: 0.8 }} />
+						Categories
 					</NavLink>
 					<NavLink className="sidebar-link" to="/participants">
 						<GroupIcon style={{ opacity: 0.8 }} />
