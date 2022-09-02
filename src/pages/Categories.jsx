@@ -29,11 +29,12 @@ const Categories = () => {
 	};
 
 	useEffect(() => {
-		const fetchContestants = async () => {
+		const fetchCategories = async () => {
 			const response = await api.get("/categories");
+			console.log("response");
 			setCategories(response.data);
 		};
-		fetchContestants();
+		fetchCategories();
 	}, [categories]);
 
 	return (

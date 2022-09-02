@@ -36,7 +36,7 @@ const Required = styled.label`
 `;
 
 const Input = styled.input`
-	padding: 0.8rem;
+	padding: 0.6rem;
 	border: 1px solid rgba(226, 226, 226);
 	outline: none;
 	font-size: 1rem;

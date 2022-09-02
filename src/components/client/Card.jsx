@@ -32,19 +32,25 @@ const Card = ({ user }) => {
 }
 
   return (
-    <Container>
-      <Header>
-        <Image src={user.imageUrl} width="80" height="80" />
-        <Content>
-          <Name>{ user.firstName } { user.lastName }</Name>
-          <LinearProgress variant="determinate" value={user.votes} />
-          <Percentage>{ user.votes / 100 }%</Percentage>
-          <Votes>{user.votes} Votes</Votes>
-          <Button onClick={() => handleVoting(user._id)}>Vote <HowToVoteIcon /></Button>
-        </Content>
-      </Header>
-    </Container>
-  )
+		<Container>
+			<Header>
+				<Image src={user.imageUrl} width="80" height="80" />
+				<Content>
+					<Name>
+						{user.firstName} {user.lastName}
+          </Name>
+          <Gender>Male</Gender>
+					<LinearProgress variant="determinate" value={user.votes} />
+					<Percentage>{user.votes / 100}%</Percentage>
+					{/* <Votes>{user.votes} Votes</Votes> */}
+					<Button onClick={() => handleVoting(user._id)}>
+						Vote <HowToVoteIcon />
+					</Button>
+				</Content>
+				<Category>Junior</Category>
+			</Header>
+		</Container>
+	);
 }
 
 const Container = styled.div`
@@ -58,6 +64,7 @@ const Container = styled.div`
 const Header = styled.div`
   display: flex;
   gap: 1.5rem;
+  position: relative;
 `
 
 const Image = styled.img`
@@ -72,9 +79,26 @@ const Content = styled.div`
   gap: 0.3rem;
 `
 
-const Name = styled.h1`
-  font-size: 1.3rem;
+const Name = styled.h2`
+  font-size: 1.2rem;
   font-weight: 700;
+`
+const Gender = styled.h3`
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: .2rem;
+`
+
+const Category = styled.p`
+  position: absolute;
+  right: 0;
+  font-size: .7rem;
+  opacity: .6;
+  font-weight: 600;
+  border: 2px solid var(--primary);
+  padding: 0.2rem 1rem .1rem;
+  border-radius: 1rem;
+  color: var(--primary);
 `
 
 const Percentage = styled.h2`
@@ -96,7 +120,7 @@ const Button = styled.button`
   cursor: pointer;
   width: fit-content;
   margin-top: .5rem;
-  padding: 0.4rem 1rem;
+  padding: 0.3rem .5rem;
   font-weight: 500;
   font-size: .9rem;
   border-radius: .3rem;

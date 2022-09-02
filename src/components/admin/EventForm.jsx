@@ -8,27 +8,35 @@ const EventForm = ({ event, setShow }) => {
 	const [name, setName] = useState("");
 	const [date, setDate] = useState("");
 	const [description, setDescription] = useState("");
-	const [image, setImage] = useState(null);
+	const [image, setImage] = useState();
+	const [imageName, setImageName] = useState("");
 
 	// Convert image to base64
-	const setFileToBase = (file) => {
-		const reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onloadend = () => {
-			setImage(reader.result);
-		};
-	};
+	// const setFileToBase = (file) => {
+	// 	const reader = new FileReader();
+	// 	reader.readAsDataURL(file);
+	// 	reader.onloadend = () => {
+	// 		setImage(reader.result);
+	// 	};
+	// };
 
 	// Handle image change
 	const handleImage = (e) => {
-		const file = e.target.files[0];
-		setFileToBase(file);
+		setImage(e.target.files[0]);
+		setImageName(e.target.files[0].name);
+		// setFileToBase(file);
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		try {
-			const response = api.post("/events", { name, date, description, image });
+			const response = api.post("/events", {
+				name,
+				date,
+				description,
+				imageName,
+				image,
+			});
 			setShow(false);
 		} catch (error) {
 			console.log(error.message);
@@ -87,7 +95,7 @@ const EventForm = ({ event, setShow }) => {
 			</Form>
 		</Container>
 	);
-};
+};;;;;;
 
 const Container = styled.div`
 	/* display: flex;

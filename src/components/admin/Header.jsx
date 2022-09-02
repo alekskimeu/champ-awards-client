@@ -20,7 +20,7 @@ const Header = () => {
 const Container = styled.div`
 	padding: 1rem 3rem;
 	height: 5rem;
-	background-color: whitesmoke;
+	background-color: var(--black);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -36,7 +36,7 @@ const Search = styled.div`
 	align-items: center;
 	background-color: var(--white);
 	width: 30vw;
-	border-radius: 0.5rem;
+	border-radius: 0.3rem;
 	padding-left: 0.8rem;
 `;
 

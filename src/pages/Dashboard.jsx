@@ -8,10 +8,12 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 
 import { stats } from "../utils/stats";
 import { api } from "../utils/api";
+import Category from "../components/admin/Category";
 
 const Dashboard = () => {
 	const [contestants, setContestants] = useState([]);
 	const [events, setEvents] = useState([]);
+	const [categories, setCategories] = useState([]);
 
 	const [search, setSearch] = useState("");
 
@@ -30,13 +32,24 @@ const Dashboard = () => {
 			const response = await api.get("/contestants");
 			setContestants(response.data);
 		};
+		fetchContestants();
+	}, [contestants]);
+
+	useEffect(() => {
 		const fetchEvents = async () => {
 			const response = await api.get("/events");
 			setEvents(response.data);
 		};
-		fetchContestants();
 		fetchEvents();
-	}, [contestants, events]);
+	}, [events]);
+
+	useEffect(() => {
+		const fetchCategories = async () => {
+			const response = await api.get("/categories");
+			setCategories(response.data);
+		};
+		fetchCategories();
+	}, [categories]);
 
 	return (
 		<Layout>
@@ -52,6 +65,24 @@ const Dashboard = () => {
 						/>
 					</Search>
 				</CardsHeader>
+
+				<EventsContainer>
+					<SectionHeader>
+						<Title>Top Categories</Title>
+						<Link to="/categories" className="header-nav">
+							All Categories
+						</Link>
+					</SectionHeader>
+					<Cards>
+						{categories
+							.filter((category) => category.name.includes(search))
+							.slice(0, 3)
+							.map((category) => (
+								<Category category={category} key={category.id} />
+							))}
+					</Cards>
+				</EventsContainer>
+
 				<EventsContainer>
 					<SectionHeader>
 						<Title>Top Events</Title>
@@ -64,7 +95,7 @@ const Dashboard = () => {
 							.filter((event) => event.name.includes(search))
 							.slice(0, 3)
 							.map((event) => (
-								<Event event={event} key={event._id} />
+								<Event event={event} key={event.id} />
 							))}
 					</Cards>
 				</EventsContainer>
@@ -85,7 +116,7 @@ const Dashboard = () => {
 							)
 							.slice(0, 3)
 							.map((user) => (
-								<Participant user={user} key={user._id} />
+								<Participant user={user} key={user.id} />
 							))}
 					</Cards>
 				</ParticipantsContainer>
@@ -164,7 +195,7 @@ const Search = styled.div`
 	align-items: center;
 	background-color: #e9e9e9;
 	width: 20vw;
-	border-radius: 0.5rem;
+	border-radius: 0.3rem;
 	padding-left: 0.8rem;
 `;
 
@@ -172,7 +203,7 @@ const Input = styled.input`
 	background-color: #e9e9e9;
 	width: 100%;
 	border: none;
-	padding: 0.9rem;
+	padding: 0.8rem;
 	outline: none;
 	border-radius: 0.5rem;
 	font-size: 1rem;

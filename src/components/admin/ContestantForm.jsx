@@ -5,6 +5,7 @@ import FormInput from "../common/FormInput";
 const ContestantForm = ({ user }) => {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
+	const [gender, setGender] = useState("");
 	const [age, setAge] = useState(null);
 	const [photo, setPhoto] = useState(null);
 
@@ -42,6 +43,46 @@ const ContestantForm = ({ user }) => {
 						required
 						onChange={(e) => setAge(e.target.value)}
 					/>
+					<InputContainer>
+						<Label>
+							Event
+							<Required>*</Required>
+						</Label>
+						<RadioContainer>
+							<Radio
+								type="radio"
+								value="Male"
+								name="gender"
+								onChange={(e) => setGender(e.target.value)}
+								checked={user && user.gender === "Male"}
+							/>{" "}
+							Male
+							<Radio
+								type="radio"
+								value="Female"
+								name="gender"
+								onChange={(e) => setGender(e.target.value)}
+								checked={user && user.gender === "Female"}
+							/>{" "}
+							Female
+						</RadioContainer>
+					</InputContainer>
+				</FormGroup>
+				<FormGroup>
+					<InputContainer>
+						<Label>
+							Event
+							<Required>*</Required>
+						</Label>
+
+						<Select
+							value={user ? user.event : ""}
+							required
+							onChange={(e) => setAge(e.target.value)}
+						>
+							<Option>Event</Option>
+						</Select>
+					</InputContainer>
 					<InputContainer>
 						<Label>
 							Category
@@ -83,13 +124,14 @@ const Form = styled.form`
 const FormGroup = styled.div`
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+	align-items: center;
 	gap: 3rem;
 `;
 
 const InputContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
+	gap: 1rem;
 `;
 
 const Label = styled.label`
@@ -102,9 +144,20 @@ const Required = styled.label`
 	margin-left: 0.2rem;
 `;
 
+const RadioContainer = styled.div`
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+`;
+
+const Radio = styled.input`
+	/* color: #ca0101;
+	margin-left: 0.2rem; */
+`;
+
 const Select = styled.select`
-	padding: 0.8rem;
-	border: 1px solid rgba(231, 231, 231, .1);
+	padding: 0.6rem;
+	border: 1px solid rgba(231, 231, 231, 0.1);
 	outline: none;
 	font-size: 1rem;
 	width: 100%;
@@ -118,23 +171,6 @@ const Select = styled.select`
 
 const Option = styled.option``;
 
-const Input = styled.input`
-	padding: 0.7rem 0.8rem;
-	border: 1px solid rgba(226, 226, 226);
-	outline: none;
-	font-size: 1rem;
-	width: 100%;
-	border-radius: 0.3rem;
-
-	&:focus {
-		border-color: var(--primary);
-	}
-
-	&[type="file"] {
-		padding: 0.5rem 0.8rem;
-	}
-`;
-
 const Image = styled.img`
 	border-radius: 50%;
 	object-fit: cover;
@@ -147,7 +183,7 @@ const Button = styled.button`
 	cursor: pointer;
 	width: fit-content;
 	margin-top: 0.5rem;
-	padding: 0.8rem 1.2rem;
+	padding: 0.65rem 1rem;
 	font-weight: 500;
 	font-size: 1rem;
 	border-radius: 0.3rem;

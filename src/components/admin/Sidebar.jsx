@@ -45,7 +45,7 @@ const Container = styled.div`
 	flex: 0.5;
 	padding: 1.5rem 2rem 3rem 2rem;
 	height: 100vh;
-	background-color: whitesmoke;
+	background-color: var(--black);
 	position: fixed;
 	left: 0;
 	min-width: 15vw;
@@ -59,6 +59,7 @@ const Logo = styled.h1`
 const Title = styled.h1`
 	font-size: 1.3rem;
 	margin-bottom: 1rem;
+	color: var(--white);
 `;
 
 const Menu = styled.div`

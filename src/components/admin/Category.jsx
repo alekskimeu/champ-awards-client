@@ -25,7 +25,7 @@ const Category = ({ category }) => {
 		<>
 			<Container>
 				<Name>{category.name}</Name>
-				<Description>{category.description}</Description>
+				<Description>{category.description.slice(0, 120)}...</Description>
 				<Action>
 					<Button>
 						<EditIcon onClick={showModal} />
@@ -36,7 +36,7 @@ const Category = ({ category }) => {
 				</Action>
 			</Container>
 
-			<Modal show={show} handleClose={handleClose} title="Update Contestant">
+			<Modal show={show} handleClose={handleClose} title="Update Category">
 				{<CategoryForm category={category} />}
 			</Modal>
 		</>
@@ -53,21 +53,22 @@ const Container = styled.div`
 `;
 
 const Name = styled.h1`
-	font-size: 1.3rem;
+	font-size: 1.2rem;
 	font-weight: 700;
 	margin-bottom: 0.5rem;
 `;
 
 const Description = styled.p`
 	opacity: 0.6;
-	font-weight: 600;
-	font-size: 1.05rem;
+	font-weight: 500;
+	font-size: 1.1rem;
 `;
 
 const Action = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 1rem;
+	margin-top: .5rem;
 `;
 
 const Button = styled.button`
@@ -78,7 +79,7 @@ const Button = styled.button`
 	cursor: pointer;
 	width: fit-content;
 	margin-top: 0.5rem;
-	padding: 0.4rem 0.6rem;
+	padding: 0.3rem 0.4rem;
 	font-weight: 500;
 	font-size: 0.8rem;
 	border-radius: 0.3rem;

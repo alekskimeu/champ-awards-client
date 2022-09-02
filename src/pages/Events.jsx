@@ -51,13 +51,13 @@ const Events = () => {
 					<Button onClick={showModal}>New Event</Button>
 				</CardsHeader>
 				<Cards>
-					{events.length > 0 ? (
+					{/* {events.length > 0 ? (
 						events
 							.filter((event) => event.name.includes(search))
-							.map((event) => <Event event={event} key={event._id} />)
+							.map((event) => <Event event={event} key={event.id} />)
 					) : (
 						<Loader />
-					)}
+					)} */}
 				</Cards>
 
 				<Modal show={show} handleClose={handleClose} title="Add Event">

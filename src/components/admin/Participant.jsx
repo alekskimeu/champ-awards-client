@@ -31,6 +31,7 @@ const Participant = ({ user }) => {
 							{user.firstName} {user.lastName}
 						</Name>
 						<Age>{user.age} yrs</Age>
+						<Gender>{user.gender} </Gender>
 						<Action>
 							<Button>
 								<EditIcon onClick={showModal} />
@@ -44,7 +45,7 @@ const Participant = ({ user }) => {
 			</Container>
 
 			<Modal show={show} handleClose={handleClose} title="Update Contestant">
-				{<ContestantForm user={ user} />}
+				{<ContestantForm user={user} />}
 			</Modal>
 		</>
 	);
@@ -85,6 +86,12 @@ const Age = styled.p`
 	opacity: 0.6;
 	font-weight: 600;
 	font-size: 1.05rem;
+`;
+
+const Gender = styled.p`
+	opacity: 0.6;
+	font-weight: 600;
+	font-size: 1rem;
 `;
 
 const Action = styled.div`

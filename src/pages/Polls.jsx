@@ -15,14 +15,21 @@ const Polls = () => {
 	const [search, setSearch] = useState("");
 
 	const [contestants, setContestants] = useState([]);
+	const [categories, setCategories] = useState([]);
 
 	useEffect(() => {
 		const fetchContestants = async () => {
 			const response = await api.get("/contestants");
 			setContestants(response.data);
 		};
+		const fetchCategories = async () => {
+			const response = await api.get("/categories");
+			setCategories(response.data);
+		};
+
 		fetchContestants();
-	}, [contestants]);
+		fetchCategories();
+	}, [contestants, categories]);
 
 	return (
 		<Container>
@@ -66,10 +73,19 @@ const Polls = () => {
 						</Search>
 						<Select>
 							<Option style={{ backgroundColor: "white" }}>Category</Option>
-							<Option style={{ backgroundColor: "white" }}>Category</Option>
-							<Option style={{ backgroundColor: "white" }}>Category</Option>
-							<Option style={{ backgroundColor: "white" }}>Category</Option>
-							<Option style={{ backgroundColor: "white" }}>Category</Option>
+							{categories.map((category) => (
+								<Option
+									style={{ backgroundColor: "white" }}
+									key={category._id}
+									// onClick={() =>
+									// 	setCategories(
+									// 		categories.filter((item) => item.name === category.name)
+									// 	)
+									// }
+								>
+									{category.name}
+								</Option>
+							))}
 						</Select>
 					</HeaderWrapper>
 					<Cards>
